@@ -1,0 +1,45 @@
+#debt-card {
+    margin-right: 3px;
+}
+
+#dough-card {
+    margin-left: 3px;
+}
+
+#debt-card, #dough-card {
+    border-radius: 10px;
+}
+
+.tracking-history-p {
+    margin-bottom: 3px;
+}
+
+.tracking-hr {
+    margin-top: 3px
+}
+
+.tracking-table {
+    position: relative;
+}
+
+.tracking-amount {
+    position: absolute;
+    right: 0;
+}
+
+
+.tracking-th {
+    width: 10%;
+}
+
+.small-font {
+    font-size: 13px;
+}
+
+.icon-red {
+    color: #dc3545!important;
+}
+
+.icon-green {
+    color: #198754!important;
+}
