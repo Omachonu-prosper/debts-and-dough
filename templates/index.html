@@ -8,60 +8,32 @@
 </nav>
 
 
-<div class="container-sm pt-3">
+<div class="container-sm mt-4">
 
     <!-- Card section -->
     <section class="container">
         <div class="row">
-            <div class="card text-white bg-danger mb-3 w-40 col" id="debt-card">
-                <div class="card-header">Debts <i class="fa-solid fa-up-long"></i></div>
-                <div class="card-body">
-                <h6 class="card-title">₦30,000.00</h6>
+            <a href="{{ url_for('debts_page') }}" class="w-40 col no-underline">
+                <div class="card text-white bg-danger mb-3 ml3 br10">
+                    <div class="card-header">Debts <i class="fa-solid fa-up-long"></i></div>
+                    <div class="card-body">
+                    <h6 class="card-title">₦30,000.00</h6>
+                    </div>
                 </div>
-            </div>
+            </a>
 
-            <div class="card text-white bg-success mb-3 w-40 col" id="dough-card">
-                <div class="card-header">Dough <i class="fa-solid fa-down-long"></i></div>
-                <div class="card-body">
-                <h6 class="card-title">₦70,000.00</h6>
+            <a href="{{ url_for('dough_page') }}" class="w-40 col no-underline">
+                <div class="card text-white bg-success mb-3 w-40 col ml3 br10">
+                    <div class="card-header">Dough <i class="fa-solid fa-down-long"></i></div>
+                    <div class="card-body">
+                    <h6 class="card-title">₦70,000.00</h6>
+                    </div>
                 </div>
-            </div>
+            </a>
         </div>
     </section>
 
-    <!-- Tracking history section -->
-    <section class="mt-3">
-        <p class="tracking-history-p">Tracking history</p>
-        <hr class="tracking-hr">
-
-        <div>
-            <table class="table table-borderless tracking-table">
-                <tbody>
-                  <tr>
-                    <th scope="row" class="tracking-th"><i class="fa-solid fa-down-left-and-up-right-to-center icon-red"></i></th>
-                    <td class="small-font">Reduced debt</td>
-                    <td class="">
-                        <span class="tracking-amount small-font">₦4,000.00</span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <th scope="row" class="tracking-th"><i class="fa-solid fa-down-left-and-up-right-to-center icon-green"></i></th>
-                    <td class="small-font">Increased dough</td>
-                    <td class="">
-                        <span class="tracking-amount small-font">₦4,000.00</span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <th scope="row" class="tracking-th"><i class="fa-solid fa-down-left-and-up-right-to-center icon-red"></i></th>
-                    <td class="small-font">Reduced debt</td>
-                    <td class="">
-                        <span class="tracking-amount small-font">₦4,000.00</span>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-        </div>
-    </section>
+    {% include 'tracking-history.html' %}
     
 </div>
 

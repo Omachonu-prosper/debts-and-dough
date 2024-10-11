@@ -1,13 +1,22 @@
-#debt-card {
+.mr3 {
     margin-right: 3px;
 }
 
-#dough-card {
+.ml3 {
     margin-left: 3px;
 }
 
-#debt-card, #dough-card {
+.br10 {
     border-radius: 10px;
+}
+
+.no-underline {
+    text-decoration: none;
+}
+
+.row>* {
+    padding-right: unset;
+    padding-left: unset;
 }
 
 .tracking-history-p {

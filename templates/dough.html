@@ -1,0 +1,56 @@
+{% extends 'layout.html' %}
+{% block content %}
+
+<nav class="navbar navbar-light bg-light">
+    <div class="container-fluid">
+        <span class="navbar-brand mb-0 h1">
+            <a href="{{ url_for('home_page') }}" class="no-underline">   
+                <i class="fa-solid fa-home"></i> 
+            </a>
+            Your Dough
+        </span>
+    </div>
+</nav>
+
+<div class="container-sm mt-4">
+
+    <!-- Card section -->
+    <section class="container">
+        <div class="row">
+            <div class="card text-white bg-success mb-3 w-40 col br10">
+                <div class="card-header">Your liquid assets</div>
+                <div class="card-body">
+                <h6 class="card-title">₦70,000.00</h6>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="container">
+        <div class="row">
+            <button type="submit" class="btn btn-success col mr3 br10">Increase dough</button>
+            <button type="submit" class="btn btn-danger col ml3 br10">Reduce dough</button>
+        </div>
+    </section>
+
+    <div class="mt-4">
+
+    {% include 'tracking-history.html' %}
+    
+    </div>
+    
+    <!-- <section class="mt-4">
+        <p class="tracking-history-p">Enter an amount to add to your dough (assets)</p>
+        
+        <form>
+            <div class="mb-3">
+                <input  type="number" inputmode="decimal" pattern="[0-9]+(\.[0-9]{1,2})?" class="form-control" id="addDebtInput">
+            </div>
+            <button type="submit" class="btn btn-success">Add dough</button>
+        </form>
+    </section> -->
+    
+</div>
+
+
+{% endblock %}
