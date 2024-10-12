@@ -2,8 +2,17 @@
 {% block content %}
 
 <nav class="navbar navbar-light bg-light">
-    <div class="container-fluid">
-      <span class="navbar-brand mb-0 h1"><i class="fa-solid fa-user"></i> Hi Prosper</span>
+    <div class="container-fluid justify-content-start">
+        <div class="dropdown">
+            <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="fa-solid fa-user"></i>
+            </a>
+          
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <li><a class="dropdown-item" href="#">Logout</a></li>
+            </ul>
+        </div>
+        <span class="navbar-brand mb-0 h1 pl-7px">Hi Prosper</span>
     </div>
 </nav>
 

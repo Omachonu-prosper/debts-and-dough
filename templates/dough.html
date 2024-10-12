@@ -28,8 +28,47 @@
 
     <section class="container">
         <div class="row">
-            <button type="submit" class="btn btn-success col mr3 br10">Increase dough</button>
-            <button type="submit" class="btn btn-danger col ml3 br10">Reduce dough</button>
+            <button type="submit" data-bs-toggle="modal" data-bs-target="#increaseDough" class="btn btn-success col mr3 br10">Increase dough</button>
+            <div class="modal fade" id="increaseDough" aria-hidden="true" aria-labelledby="increaseDoughLabel" tabindex="-1">
+                <div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <p class="tracking-history-p">Enter an amount to add to your dough (assets)</p>
+        
+                            <form>
+                                <div class="mb-3">
+                                    <input  type="number" inputmode="decimal" pattern="[0-9]+(\.[0-9]{1,2})?" class="form-control" id="addDebtInput">
+                                </div>
+                                <button type="submit" class="btn btn-success">Increase dough</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" data-bs-toggle="modal" data-bs-target="#reduceDough" class="btn btn-danger col ml3 br10">Reduce dough</button>
+            <div class="modal fade" id="reduceDough" aria-hidden="true" aria-labelledby="reduceDoughlabel" tabindex="-1">
+                <div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <p class="tracking-history-p">Enter an amount to subtract from your dough (assets)</p>
+        
+                            <form>
+                                <div class="mb-3">
+                                    <input  type="number" inputmode="decimal" pattern="[0-9]+(\.[0-9]{1,2})?" class="form-control" id="addDebtInput">
+                                </div>
+                                <button type="submit" class="btn btn-dager">Reduce dough</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -38,17 +77,6 @@
     {% include 'tracking-history.html' %}
     
     </div>
-    
-    <!-- <section class="mt-4">
-        <p class="tracking-history-p">Enter an amount to add to your dough (assets)</p>
-        
-        <form>
-            <div class="mb-3">
-                <input  type="number" inputmode="decimal" pattern="[0-9]+(\.[0-9]{1,2})?" class="form-control" id="addDebtInput">
-            </div>
-            <button type="submit" class="btn btn-success">Add dough</button>
-        </form>
-    </section> -->
     
 </div>
 

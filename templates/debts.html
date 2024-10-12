@@ -28,8 +28,47 @@
 
     <section class="container">
         <div class="row">
-            <button type="submit" class="btn btn-danger col mr3 br10">Increase debt</button>
-            <button type="submit" class="btn btn-success col ml3 br10">Reduce debt</button>
+            <button type="submit" data-bs-toggle="modal" data-bs-target="#increaseDebt" class="btn btn-danger col mr3 br10">Increase Debt</button>
+            <div class="modal fade" id="increaseDebt" aria-hidden="true" aria-labelledby="increaseDebtLabel" tabindex="-1">
+                <div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <p class="tracking-history-p">Enter an amount to add to your debt</p>
+        
+                            <form>
+                                <div class="mb-3">
+                                    <input  type="number" inputmode="decimal" pattern="[0-9]+(\.[0-9]{1,2})?" class="form-control" id="addDebtInput">
+                                </div>
+                                <button type="submit" class="btn btn-danger">Increase debt</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" data-bs-toggle="modal" data-bs-target="#reduceDebt" class="btn btn-success col ml3 br10">Reduce dough</button>
+            <div class="modal fade" id="reduceDebt" aria-hidden="true" aria-labelledby="reduceDebtlabel" tabindex="-1">
+                <div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <p class="tracking-history-p">Enter an amount to subtract from your debt</p>
+        
+                            <form>
+                                <div class="mb-3">
+                                    <input  type="number" inputmode="decimal" pattern="[0-9]+(\.[0-9]{1,2})?" class="form-control" id="addDebtInput">
+                                </div>
+                                <button type="submit" class="btn btn-success">Reduce debt</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -38,17 +77,6 @@
         {% include 'tracking-history.html' %}
         
     </div>
-    
-    <!-- <section class="mt-4">
-        <p class="tracking-history-p">Enter an amount to add to your debt</p>
-        
-        <form>
-            <div class="mb-3">
-                <input  type="number" inputmode="decimal" pattern="[0-9]+(\.[0-9]{1,2})?" class="form-control" id="addDebtInput">
-            </div>
-            <button type="submit" class="btn btn-danger">Add debt</button>
-        </form>
-    </section> -->
     
 </div>
 
