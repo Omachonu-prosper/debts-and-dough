@@ -16,14 +16,6 @@ mongo = PyMongo(app)
 
 # Database collections
 users = mongo.db.Users
-    
-
-@app.route('/login', methods=['GET', 'POST'])
-def login_page():
-    if request.method == 'POST':
-        return 'You want to login'
-    else:
-        return render_template('login.html', title='Login')
 
 
 @app.route('/signup', methods=['GET', 'POST'])
@@ -53,6 +45,41 @@ def signup_page():
         return redirect(url_for('home_page'))
     
     return render_template('signup.html', title='Signup')
+
+
+@app.route('/login', methods=['GET', 'POST'])
+def login_page():    
+    if request.method == 'POST':
+        email = request.form.get('email', None)
+        password = request.form.get('password', None)
+
+        if not email or not password:
+            flash(message="Invalid login data", category="danger")
+            return redirect(url_for('login_page'))
+
+        # Check if email is exists
+        user = users.find_one({'email': email})
+        if not user:
+            flash(message="Email not found", category="danger")
+            return redirect(url_for('login_page'))
+        
+        user_password = user.get('password')
+        if not bcrypt.check_password_hash(user_password, password):
+            flash(message=f"Invalid password for {email}", category='danger')
+            return redirect(url_for('login_page'))
+
+        session['user_id'] = user.get('user_id')
+        return redirect(url_for('home_page'))
+    else:
+        if session.get('user_id'):
+            return redirect(url_for('home_page'))
+        return render_template('login.html', title='Login')
+
+
+@app.route('/logout')
+def logout():
+    session.pop('user_id')
+    return redirect(url_for('login_page'))
 
 
 @app.route('/')
