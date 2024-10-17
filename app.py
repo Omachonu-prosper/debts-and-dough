@@ -219,7 +219,7 @@ def dough_page():
                 {'user_id': user_id},
                 {'$push': {
                     'transactions': {
-                        'type': 'debt',
+                        'type': 'dough',
                         'description': 'Reduced Dough',
                         'amount': reduce_dough,
                         'amount_display': format(reduce_dough, ',.2f'),
