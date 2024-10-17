@@ -106,6 +106,8 @@ def home_page():
     if not user:
         session.pop('user_id')
         return redirect(url_for('login_page'))
+    
+    user['transactions'] = user.get('transactions', [])[::-1]
     return render_template('index.html', title='Home page', user=user)
 
 
@@ -122,6 +124,7 @@ def debts_page():
     
     if request.method == 'POST':
         increase_debt = request.form.get('increase_debt')
+        reduce_debt = request.form.get('reduce_debt')
 
         if increase_debt:
             # create_transaction_debt(increase_debt, 'increase_debt', users)
@@ -145,13 +148,34 @@ def debts_page():
                     'debts_display': format(debt_display, ',.2f')
                 }}
             )
-
+        elif reduce_debt:
+            reduce_debt = float(reduce_debt)
+            debt_display = user.get('debts') - reduce_debt
+            users.update_one(
+                {'user_id': user_id},
+                {'$push': {
+                    'transactions': {
+                        'type': 'debt',
+                        'description': 'Reduced Debt',
+                        'amount': reduce_debt,
+                        'amount_display': format(reduce_debt, ',.2f'),
+                        'created_at': timestamp()
+                    }
+                },
+                '$inc': {
+                    'debts': - reduce_debt,
+                },
+                '$set': {
+                    'debts_display': format(debt_display, ',.2f')
+                }}
+            )
         return redirect(url_for('debts_page'))         
      
+    user['transactions'] = user.get('transactions', [])[::-1]
     return render_template('debts.html', title='Debts', user=user)
 
 
-@app.route('/dough')
+@app.route('/dough', methods=['GET', 'POST'])
 def dough_page():
     user_id = session.get('user_id')
     if not user_id:
@@ -161,6 +185,57 @@ def dough_page():
     if not user:
         session.pop('user_id')
         return redirect(url_for('login_page'))
+    
+    if request.method == 'POST':
+        increase_dough = request.form.get('increase_dough')
+        reduce_dough = request.form.get('reduce_dough')
+
+        if increase_dough:
+            # create_transaction_debt(increase_dough, 'increase_dough', users)
+            increase_dough = float(increase_dough)
+            dough = user.get('dough') + increase_dough
+            users.update_one(
+                {'user_id': user_id},
+                {'$push': {
+                    'transactions': {
+                        'type': 'dough',
+                        'description': 'Increased Dough',
+                        'amount': increase_dough,
+                        'amount_display': format(increase_dough, ',.2f'),
+                        'created_at': timestamp()
+                    }
+                },
+                '$inc': {
+                    'dough': increase_dough,
+                },
+                '$set': {
+                    'dough_display': format(dough, ',.2f')
+                }}
+            )
+        elif reduce_dough:
+            reduce_dough = float(reduce_dough)
+            dough_display = user.get('dough') - reduce_dough
+            users.update_one(
+                {'user_id': user_id},
+                {'$push': {
+                    'transactions': {
+                        'type': 'debt',
+                        'description': 'Reduced Dough',
+                        'amount': reduce_dough,
+                        'amount_display': format(reduce_dough, ',.2f'),
+                        'created_at': timestamp()
+                    }
+                },
+                '$inc': {
+                    'dough': - reduce_dough,
+                },
+                '$set': {
+                    'dough_display': format(dough_display, ',.2f')
+                }}
+            )
+        return redirect(url_for('dough_page'))
+    
+    user['transactions'] = user.get('transactions', [])[::-1]
     return render_template('dough.html', title='Dough', user=user)
 
 

@@ -20,7 +20,7 @@
             <div class="card text-white bg-success mb-3 w-40 col br10">
                 <div class="card-header">Your liquid assets</div>
                 <div class="card-body">
-                <h6 class="card-title">₦70,000.00</h6>
+                <h6 class="card-title">₦{{user.get('dough_display', '0.00')}}</h6>
                 </div>
             </div>
         </div>
@@ -38,9 +38,9 @@
                         <div class="modal-body">
                             <p class="tracking-history-p">Enter an amount to add to your dough (assets)</p>
         
-                            <form>
+                            <form action="{{url_for('dough_page')}}" method="post">
                                 <div class="mb-3">
-                                    <input  type="number" inputmode="decimal" pattern="[0-9]+(\.[0-9]{1,2})?" class="form-control" id="addDebtInput">
+                                    <input  type="number" inputmode="decimal" pattern="[0-9]+(\.[0-9]{1,2})?" class="form-control" id="addDebtInput" name="increase_dough">
                                 </div>
                                 <button type="submit" class="btn btn-success">Increase dough</button>
                             </form>
@@ -59,9 +59,9 @@
                         <div class="modal-body">
                             <p class="tracking-history-p">Enter an amount to subtract from your dough (assets)</p>
         
-                            <form>
+                            <form action="{{url_for('dough_page')}}" method="post">
                                 <div class="mb-3">
-                                    <input  type="number" inputmode="decimal" pattern="[0-9]+(\.[0-9]{1,2})?" class="form-control" id="addDebtInput">
+                                    <input  type="number" inputmode="decimal" pattern="[0-9]+(\.[0-9]{1,2})?" class="form-control" id="addDebtInput" name="reduce_dough">
                                 </div>
                                 <button type="submit" class="btn btn-danger">Reduce dough</button>
                             </form>
