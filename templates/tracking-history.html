@@ -4,13 +4,13 @@
     <hr class="tracking-hr">
 
     <!-- Display when there is no tracking data -->
-    <div>
+    <!-- <div>
         <img src="/static/assets/No-data-storyset-illustration.png" alt="Gif indicating an empty tracking history"  class="m-auto" style="display: block; width: 200px;">
         <p style="text-align: center;">Your tracking history is empty</p>
-    </div>
+    </div> -->
 
     <!-- Display the tracking history -->
-    <!-- <div>
+    <div>
         <table class="table table-borderless tracking-table">
             <tbody>
               <tr>
@@ -24,17 +24,12 @@
                 <th scope="row" class="tracking-th"><i class="fa-solid fa-down-left-and-up-right-to-center icon-green"></i></th>
                 <td class="small-font">Increased dough</td>
                 <td class="">
-                    <span class="tracking-amount small-font">₦4,000.00</span>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row" class="tracking-th"><i class="fa-solid fa-down-left-and-up-right-to-center icon-red"></i></th>
-                <td class="small-font">Reduced debt</td>
-                <td class="">
-                    <span class="tracking-amount small-font">₦4,000.00</span>
+                    <span class="tracking-amount small-font" data-bs-toggle="tooltip" data-bs-placement="bottom" title="{{user.get('created_at')  }}">
+                      ₦4,000.00
+                    </span>
                 </td>
               </tr>
             </tbody>
           </table>
-    </div> -->
+    </div>
 </section>

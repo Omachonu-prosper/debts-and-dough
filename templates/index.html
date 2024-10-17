@@ -12,12 +12,12 @@
                 <li><a class="dropdown-item" href="{{ url_for('logout') }}">Logout</a></li>
             </ul>
         </div>
-        <span class="navbar-brand mb-0 h1 pl-7px">Hi Prosper</span>
+        <span class="navbar-brand mb-0 h1 pl-7px">Hi {{user.get('username', '')}}</span>
     </div>
 </nav>
 
 
-<div class="container-sm mt-4">
+<div class="container-sm my-4">
 
     <!-- Card section -->
     <section class="container">
@@ -26,7 +26,7 @@
                 <div class="card text-white bg-danger mb-3 ml3 br10">
                     <div class="card-header">Debts <i class="fa-solid fa-up-long"></i></div>
                     <div class="card-body">
-                    <h6 class="card-title">₦30,000.00</h6>
+                    <h6 class="card-title">₦{{user.get('debts_display', '0.00')}}</h6>
                     </div>
                 </div>
             </a>
@@ -35,7 +35,7 @@
                 <div class="card text-white bg-success mb-3 w-40 col ml3 br10">
                     <div class="card-header">Dough <i class="fa-solid fa-down-long"></i></div>
                     <div class="card-body">
-                    <h6 class="card-title">₦70,000.00</h6>
+                    <h6 class="card-title">₦{{user.get('dough_display', '0.00')}}</h6>
                     </div>
                 </div>
             </a>

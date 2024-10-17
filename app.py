@@ -4,6 +4,8 @@ from flask_pymongo import PyMongo
 from flask_bcrypt import Bcrypt
 from dotenv import load_dotenv
 from uuid import uuid4
+from datetime import datetime
+from utils import timestamp
 
 app = Flask(__name__)
 
@@ -21,10 +23,11 @@ users = mongo.db.Users
 @app.route('/signup', methods=['GET', 'POST'])
 def signup_page():
     if request.method == 'POST':
+        username = request.form.get('username', None)
         email = request.form.get('email', None)
         password = request.form.get('password', None)
 
-        if not email or not password:
+        if not email or not password or not username:
             flash(message="Invalid signup data", category="danger")
             return redirect(url_for('signup_page'))
 
@@ -36,9 +39,17 @@ def signup_page():
         password = bcrypt.generate_password_hash(password, 12).decode()
         user_id = str(uuid4().hex)
         users.insert_one({
+            'username': username,
             'email': email,
             'password': password,
-            'user_id': user_id
+            'user_id': user_id,
+            'debts': 0,
+            'debts_display': '0.00',
+            'dough': 0,
+            'dough_display': '0.00',
+            'transactions': [],
+            'created_at': timestamp(),
+            'last_login': timestamp()
         })
         flash(message="Welcome to debts and dough", category="success")
         session['user_id'] = user_id
@@ -58,7 +69,10 @@ def login_page():
             return redirect(url_for('login_page'))
 
         # Check if email is exists
-        user = users.find_one({'email': email})
+        user = users.find_one_and_update(
+            {'email': email},
+            {'$set': {'last_login': timestamp()}}
+        )
         if not user:
             flash(message="Email not found", category="danger")
             return redirect(url_for('login_page'))
@@ -84,7 +98,15 @@ def logout():
 
 @app.route('/')
 def home_page():
-    return render_template('index.html', title='Home page')
+    user_id = session.get('user_id')
+    if not user_id:
+        return redirect(url_for('login_page'))
+    
+    user = users.find_one({'user_id': user_id}, {'_id': 0})
+    if not user:
+        session.pop('user_id')
+        return redirect(url_for('login_page'))
+    return render_template('index.html', title='Home page', user=user)
 
 
 @app.route('/debts')
