@@ -4,20 +4,20 @@
 <div class="container mt-5" style="max-width: 600px;">
     <h3 class="mb-3">Sign Up</h3>
     
-    <form class="needs-validation" novalidate>
+    <form action="{{url_for('signup_page')}}" method="post">
         <div class="mb-3">
             <label for="inputEmail1" class="form-label">Email address</label>
-            <input type="email" class="form-control" id="inputEmail1" aria-describedby="emailHelp">
+            <input type="email" class="form-control" id="inputEmail1" aria-describedby="emailHelp" required name="email">
         </div>
 
         <div class="mb-3">
             <label for="inputPassword" class="form-label">Password</label>
-            <input type="password" class="form-control" id="inputPassword">
+            <input type="password" class="form-control" id="inputPassword" required name="password">
         </div>
 
         <div class="mb-3">
             <label for="confirmPassword" class="form-label">Confirm Password</label>
-            <input type="password" class="form-control" id="confirmPassword">
+            <input type="password" class="form-control" id="confirmPassword" required>
         </div>
 
         <button type="submit" class="btn btn-primary">Submit</button>

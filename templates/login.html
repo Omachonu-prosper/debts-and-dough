@@ -4,7 +4,7 @@
 <div class="container mt-5" style="max-width: 600px;">
     <h3 class="mb-3">Login</h3>
     
-    <form>
+    <form action="{{url_for('login_page')}}" method="post">
         <div class="mb-3">
             <label for="inputEmail1" class="form-label">Email address</label>
             <input type="email" class="form-control" id="inputEmail1" aria-describedby="emailHelp">
