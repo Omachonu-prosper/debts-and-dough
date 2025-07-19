@@ -1,49 +1,26 @@
 {% extends "layout.html" %}
 {% block content %}
 
-<nav class="navbar navbar-light bg-light">
-    <div class="container-fluid justify-content-start">
-        <div class="dropdown">
-            <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                <i class="fa-solid fa-user"></i>
-            </a>
-          
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                <li><a class="dropdown-item" href="{{ url_for('logout') }}">Logout</a></li>
-            </ul>
+<section class="card-section">
+    <a href="{{ url_for('debts_page') }}" class="w-48 no-underline">
+        <div class="card bg-danger">
+            <div class="card-header">Debts <i class="fa-solid fa-arrow-up"></i></div>
+            <div class="card-body">
+                <h4 class="card-title">₦{{user.get('debts_display', '0.00')}}</h4>
+            </div>
         </div>
-        <span class="navbar-brand mb-0 h1 pl-7px">Hi {{user.get('username', '')}}</span>
-    </div>
-</nav>
+    </a>
 
-
-<div class="container-sm my-4">
-
-    <!-- Card section -->
-    <section class="container">
-        <div class="row">
-            <a href="{{ url_for('debts_page') }}" class="w-40 col no-underline">
-                <div class="card text-white bg-danger mb-3 ml3 br10">
-                    <div class="card-header">Debts <i class="fa-solid fa-up-long"></i></div>
-                    <div class="card-body">
-                    <h6 class="card-title">₦{{user.get('debts_display', '0.00')}}</h6>
-                    </div>
-                </div>
-            </a>
-
-            <a href="{{ url_for('dough_page') }}" class="w-40 col no-underline">
-                <div class="card text-white bg-success mb-3 w-40 col ml3 br10">
-                    <div class="card-header">Dough <i class="fa-solid fa-down-long"></i></div>
-                    <div class="card-body">
-                    <h6 class="card-title">₦{{user.get('dough_display', '0.00')}}</h6>
-                    </div>
-                </div>
-            </a>
+    <a href="{{ url_for('dough_page') }}" class="w-48 no-underline">
+        <div class="card bg-success">
+            <div class="card-header">Dough <i class="fa-solid fa-arrow-down"></i></div>
+            <div class="card-body">
+                <h4 class="card-title">₦{{user.get('dough_display', '0.00')}}</h4>
+            </div>
         </div>
-    </section>
+    </a>
+</section>
 
-    {% include 'tracking-history.html' %}
-    
-</div>
+{% include 'tracking-history.html' %}
 
 {% endblock %}
