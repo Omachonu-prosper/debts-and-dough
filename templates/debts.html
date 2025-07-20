@@ -1,84 +1,62 @@
-{% extends 'layout.html' %}
-{% block content %}
+{% extends "page_layout.html" %} {% block main_content %}
 
-<nav class="navbar navbar-light bg-light">
-    <div class="container-fluid">
-        <span class="navbar-brand mb-0 h1">
-            <a href="{{ url_for('home_page') }}" class="no-underline">   
-                <i class="fa-solid fa-home"></i> 
-            </a>
-            Your Debts
-        </span>
-    </div>
-</nav>
-
-<div class="container-sm mt-4">
-
-    <!-- Card section -->
-    <section class="container">
-        <div class="row">
-            <div class="card text-white bg-danger mb-3 w-40 col br10">
-                <div class="card-header">Your currently owe</div>
-                <div class="card-body">
-                <h6 class="card-title">₦{{user.get('debts_display', '0.00')}}</h6>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="container">
-        <div class="row">
-            <button type="submit" data-bs-toggle="modal" data-bs-target="#increaseDebt" class="btn btn-danger col mr3 br10">Increase Debt</button>
-            <div class="modal fade" id="increaseDebt" aria-hidden="true" aria-labelledby="increaseDebtLabel" tabindex="-1">
-                <div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <p class="tracking-history-p">Enter an amount to add to your debt</p>
-        
-                            <form action="{{url_for('debts_page')}}" method="post">
-                                <div class="mb-3">
-                                    <input  type="number" inputmode="decimal" pattern="[0-9]+(\.[0-9]{1,2})?" class="form-control" id="addDebtInput" name="increase_debt">
-                                </div>
-                                <button type="submit" class="btn btn-danger">Increase debt</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <button type="submit" data-bs-toggle="modal" data-bs-target="#reduceDebt" class="btn btn-success col ml3 br10">Reduce debt</button>
-            <div class="modal fade" id="reduceDebt" aria-hidden="true" aria-labelledby="reduceDebtlabel" tabindex="-1">
-                <div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <p class="tracking-history-p">Enter an amount to subtract from your debt</p>
-        
-                            <form action="{{url_for('debts_page')}}" method="post">
-                                <div class="mb-3">
-                                    <input  type="number" inputmode="decimal" pattern="[0-9]+(\.[0-9]{1,2})?" class="form-control" id="addDebtInput" name="reduce_debt">
-                                </div>
-                                <button type="submit" class="btn btn-success">Reduce debt</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <div class="mt-4">
-
-        {% include 'tracking-history.html' %}
-        
-    </div>
-    
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <h1 class="h3 mb-0">Your Debts</h1>
+  <a href="{{ url_for('home_page') }}" class="btn btn-outline-secondary"
+    ><i class="fa-solid fa-arrow-left me-2"></i>Back to Dashboard</a
+  >
 </div>
 
+<section class="card text-white bg-danger shadow-sm mb-4">
+  <div class="card-body">
+    <h5 class="card-title">You currently owe</h5>
+    <p class="card-text fs-4">₦{{user.get('debts_display', '0.00')}}</p>
+  </div>
+</section>
 
-{% endblock %}
+<section class="row">
+  <div class="col-md-6 mb-4">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h5 class="card-title mb-3">Increase Debt</h5>
+        <form action="{{url_for('debts_page')}}" method="post">
+          <div class="mb-3">
+            <input
+              type="number"
+              inputmode="decimal"
+              pattern="[0-9]+(\.[0-9]{1,2})?"
+              class="form-control"
+              name="increase_debt"
+              placeholder="Amount"
+              required
+            />
+          </div>
+          <button type="submit" class="btn btn-danger w-100">Add Debt</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6 mb-4">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h5 class="card-title mb-3">Reduce Debt</h5>
+        <form action="{{url_for('debts_page')}}" method="post">
+          <div class="mb-3">
+            <input
+              type="number"
+              inputmode="decimal"
+              pattern="[0-9]+(\.[0-9]{1,2})?"
+              class="form-control"
+              name="reduce_debt"
+              placeholder="Amount"
+              required
+            />
+          </div>
+          <button type="submit" class="btn btn-success w-100">Pay Debt</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+ {% endblock %}

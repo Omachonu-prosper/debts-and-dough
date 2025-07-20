@@ -1,0 +1,45 @@
+{% extends "page_layout.html" %}
+{% block main_content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1 class="h3 mb-0">Tracking History</h1>
+    <a href="{{ url_for('home_page') }}" class="btn btn-outline-secondary"><i class="fa-solid fa-arrow-left me-2"></i>Back to Dashboard</a>
+</div>
+
+<section class="mt-4">
+	{% if not user.get('transactions') %}
+		<!-- Display when there is no tracking data -->
+		<div class="text-center py-5">
+			<img src="/static/assets/No-data-storyset-illustration.png" alt="No tracking history" class="img-fluid" style="max-width: 200px;">
+			<p class="text-muted mt-3">Your tracking history is empty</p>
+		</div>
+	{% else %}
+		<!-- Display the tracking history -->
+		<ul class="list-unstyled">
+			{% for transaction in user.get('transactions') %}
+				<li class="d-flex align-items-center justify-content-between bg-white rounded shadow-sm p-3 mb-3">
+					<div class="d-flex align-items-center">
+						{% if transaction.get('type') == 'debt' %}
+							<div class="rounded-circle bg-danger-light d-flex align-items-center justify-content-center me-3" style="width: 40px; height: 40px;">
+								<i class="fa-solid fa-arrow-down text-danger"></i>
+							</div>
+						{% else %}
+							<div class="rounded-circle bg-success-light d-flex align-items-center justify-content-center me-3" style="width: 40px; height: 40px;">
+								<i class="fa-solid fa-arrow-up text-success"></i>
+							</div>
+						{% endif %}
+						<div>
+							<p class="fw-bold mb-0">{{ transaction.get('description') }}</p>
+							<small class="text-muted">{{ transaction.get('created_at') }}</small>
+						</div>
+					</div>
+					{% if transaction.get('type') == 'debt' %}
+						<p class="fw-bold text-danger mb-0">-₦{{ transaction.get('amount_display') }}</p>
+					{% else %}
+						<p class="fw-bold text-success mb-0">+₦{{ transaction.get('amount_display') }}</p>
+					{% endif %}
+				</li>
+			{% endfor %}
+		</ul>
+	{% endif %}
+</section>
+{% endblock %}
