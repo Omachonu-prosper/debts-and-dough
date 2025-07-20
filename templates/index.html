@@ -1,27 +1,99 @@
-{% extends "page_layout.html" %} {% block main_content %}
+{% extends "page_layout.html" %}
+{% block main_content %}
 
-<section class="d-flex justify-content-between align-items-center mb-4">
-  <h1 class="h3 mb-0">Welcome, {{user.get('username', '')}}!</h1>
-</section>
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1 class="h3 mb-0">Welcome, {{user.get('username', '')}}!</h1>
+</div>
 
 <section class="d-flex justify-content-between mb-4">
-  <a href="{{ url_for('debts_page') }}" class="text-decoration-none w-50 me-2">
-    <div class="card text-white bg-danger shadow-sm">
-      <div class="card-body">
-        <h5 class="card-title">Debts <i class="fa-solid fa-arrow-up"></i></h5>
-        <p class="card-text fs-4">₦{{user.get('debts_display', '0.00')}}</p>
-      </div>
-    </div>
-  </a>
+    <a href="{{ url_for('debts_page') }}" class="text-decoration-none w-50 me-2">
+        <div class="card text-white bg-danger shadow-sm">
+            <div class="card-body">
+                <h5 class="card-title">Debts <i class="fa-solid fa-arrow-up"></i></h5>
+                <p class="card-text fs-4">₦{{user.get('debts_display', '0.00')}}</p>
+            </div>
+        </div>
+    </a>
 
-  <a href="{{ url_for('dough_page') }}" class="text-decoration-none w-50 ms-2">
-    <div class="card text-white bg-success shadow-sm">
-      <div class="card-body">
-        <h5 class="card-title">Dough <i class="fa-solid fa-arrow-down"></i></h5>
-        <p class="card-text fs-4">₦{{user.get('dough_display', '0.00')}}</p>
-      </div>
-    </div>
-  </a>
+    <a href="{{ url_for('dough_page') }}" class="text-decoration-none w-50 ms-2">
+        <div class="card text-white bg-success shadow-sm">
+            <div class="card-body">
+                <h5 class="card-title">Dough <i class="fa-solid fa-arrow-down"></i></h5>
+                <p class="card-text fs-4">₦{{user.get('dough_display', '0.00')}}</p>
+            </div>
+        </div>
+    </a>
 </section>
 
-{% include 'tracking-history.html' %} {% endblock %}
+<section class="row mt-4">
+    <div class="col-md-6">
+        <div class="card shadow-sm mb-4">
+            <div class="card-header">Debt Trends</div>
+            <div class="card-body">
+                <canvas id="debtChart"></canvas>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card shadow-sm mb-4">
+            <div class="card-header">Dough Trends</div>
+            <div class="card-body">
+                <canvas id="doughChart"></canvas>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    // Chart data will be populated by Flask
+    const debtData = {{ debt_chart_data | tojson }};
+    const doughData = {{ dough_chart_data | tojson }};
+
+    // Render Debt Chart
+    new Chart(document.getElementById('debtChart'), {
+        type: 'line',
+        data: {
+            labels: debtData.labels,
+            datasets: [{
+                label: 'Debt Amount',
+                data: debtData.values,
+                borderColor: 'rgb(220, 53, 69)',
+                tension: 0.1,
+                fill: false
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+
+    // Render Dough Chart
+    new Chart(document.getElementById('doughChart'), {
+        type: 'line',
+        data: {
+            labels: doughData.labels,
+            datasets: [{
+                label: 'Dough Amount',
+                data: doughData.values,
+                borderColor: 'rgb(25, 135, 84)',
+                tension: 0.1,
+                fill: false
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+</script>
+
+{% endblock %}

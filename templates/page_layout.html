@@ -1,24 +1,28 @@
-{% extends "base_layout.html" %} {% block content %}
+{% extends "base_layout.html" %}
+
+{% block content %}
 <div class="d-flex">
-  <div
-    class="sidebar d-flex flex-column justify-content-between align-items-center py-4"
-  >
+  <!-- Sidebar for larger screens -->
+  <div class="sidebar d-none d-md-flex flex-column justify-content-between align-items-center py-4">
     <div class="d-flex flex-column">
-      <a href="#" class="sidebar-icon mb-4"
-        ><i class="fa-solid fa-chart-line"></i
-      ></a>
-      <a href="#" class="sidebar-icon mb-4"
-        ><i class="fa-solid fa-wallet"></i
-      ></a>
+      <a href="{{ url_for('home_page') }}" class="sidebar-icon mb-4"><i class="fa-solid fa-chart-line"></i></a>
+      <a href="{{ url_for('tracking_history_page') }}" class="sidebar-icon mb-4"><i class="fa-solid fa-clock"></i></a>
     </div>
-    <a href="{{ url_for('logout') }}" class="sidebar-icon"
-      ><i class="fa-solid fa-power-off"></i
-    ></a>
+    <a href="{{ url_for('logout') }}" class="sidebar-icon"><i class="fa-solid fa-power-off"></i></a>
   </div>
+
+  <!-- Main content area -->
   <div class="main-content flex-grow-1">
     <div class="container">
       <main>{% block main_content %}{% endblock %}</main>
     </div>
   </div>
 </div>
+
+<!-- Bottom navigation for mobile screens -->
+<nav class="bottom-nav d-flex d-md-none justify-content-around align-items-center fixed-bottom bg-white shadow-lg py-2">
+  <a href="{{ url_for('home_page') }}" class="bottom-nav-icon"><i class="fa-solid fa-chart-line"></i></a>
+  <a href="{{ url_for('tracking_history_page') }}" class="bottom-nav-icon"><i class="fa-solid fa-clock"></i></a>
+  <a href="{{ url_for('logout') }}" class="bottom-nav-icon"><i class="fa-solid fa-power-off"></i></a>
+</nav>
 {% endblock %}

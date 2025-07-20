@@ -193,3 +193,28 @@ body {
 .transaction-amount.text-success {
     color: #388e3c !important;
 }
+
+/* Bottom Navigation Bar */
+.bottom-nav {
+    height: 60px;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+}
+
+.bottom-nav-icon {
+    font-size: 24px;
+    color: #6c757d;
+    transition: color 0.3s ease;
+}
+
+.bottom-nav-icon:hover {
+    color: #007bff;
+}
+
+@media (max-width: 767.98px) {
+    .main-content {
+        margin-left: 0;
+        padding-bottom: 70px; /* Space for bottom nav */
+    }
+}

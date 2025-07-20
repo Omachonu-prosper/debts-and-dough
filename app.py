@@ -107,8 +107,66 @@ def home_page():
         session.pop('user_id')
         return redirect(url_for('login_page'))
     
+    transactions = user.get('transactions', [])
+    
+    debt_labels = []
+    debt_values = []
+    dough_labels = []
+    dough_values = []
+
+    current_debt = 0.0
+    current_dough = 0.0
+
+    # Sort transactions by date to ensure correct cumulative sum
+    transactions.sort(key=lambda x: datetime.strptime(x.get('created_at', '').split(' ')[0], '%Y-%m-%d'))
+
+    for transaction in transactions:
+        date = transaction.get('created_at', '').split(' ')[0]
+        amount = transaction['amount']
+        transaction_type = transaction['type']
+
+        if transaction_type == 'debt':
+            if transaction['description'] == 'Increased Debt':
+                current_debt += amount
+            elif transaction['description'] == 'Reduced Debt':
+                current_debt -= amount
+            debt_labels.append(date)
+            debt_values.append(current_debt)
+        elif transaction_type == 'dough':
+            if transaction['description'] == 'Increased Dough':
+                current_dough += amount
+            elif transaction['description'] == 'Reduced Dough':
+                current_dough -= amount
+            dough_labels.append(date)
+            dough_values.append(current_dough)
+
+    debt_chart_data = {
+        'labels': debt_labels,
+        'values': debt_values
+    }
+    dough_chart_data = {
+        'labels': dough_labels,
+        'values': dough_values
+    }
+
+    return render_template('index.html', title='Home page', user=user, 
+                           debt_chart_data=debt_chart_data, 
+                           dough_chart_data=dough_chart_data)
+
+
+@app.route('/tracking-history')
+def tracking_history_page():
+    user_id = session.get('user_id')
+    if not user_id:
+        return redirect(url_for('login_page'))
+    
+    user = users.find_one({'user_id': user_id}, {'_id': 0})
+    if not user:
+        session.pop('user_id')
+        return redirect(url_for('login_page'))
+    
     user['transactions'] = user.get('transactions', [])[::-1]
-    return render_template('index.html', title='Home page', user=user)
+    return render_template('tracking_history_page.html', title='Tracking History', user=user)
 
 
 @app.route('/debts', methods=['GET', 'POST'])
