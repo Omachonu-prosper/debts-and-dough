@@ -212,9 +212,31 @@ body {
     color: #007bff;
 }
 
+.clickable-chart {
+    cursor: pointer;
+}
+
 @media (max-width: 767.98px) {
+    body {
+        font-size: 0.875rem; /* Smaller base font size for mobile */
+    }
     .main-content {
         margin-left: 0;
         padding-bottom: 70px; /* Space for bottom nav */
+    }
+    .h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
+        font-size: 1.25rem; /* Adjust heading sizes */
+    }
+    .card-title {
+        font-size: 1.5rem; /* Adjust card title size */
+    }
+    .card-text.fs-4 {
+        font-size: 1.25rem !important; /* Adjust card text size */
+    }
+    .sidebar-icon {
+        font-size: 24px; /* Slightly smaller icons for mobile sidebar */
+    }
+    .bottom-nav-icon {
+        font-size: 20px; /* Smaller icons for bottom nav */
     }
 }
