@@ -1,36 +1,36 @@
-<section class="tracking-history">
-	<p class="tracking-history-p">Tracking history</p>
-	<hr class="tracking-hr">
+<section class="mt-4">
+	<h3 class="h5 mb-3">Tracking history</h3>
 
 	{% if not user.get('transactions') %}
 		<!-- Display when there is no tracking data -->
-		<div>
-			<img src="/static/assets/No-data-storyset-illustration.png" alt="Gif indicating an empty tracking history"  class="m-auto" style="display: block; width: 200px;">
-			<p style="text-align: center;">Your tracking history is empty</p>
+		<div class="text-center py-5">
+			<img src="/static/assets/No-data-storyset-illustration.png" alt="No tracking history" class="img-fluid" style="max-width: 200px;">
+			<p class="text-muted mt-3">Your tracking history is empty</p>
 		</div>
 	{% else %}
 		<!-- Display the tracking history -->
-		<ul class="transaction-list">
+		<ul class="list-unstyled">
 			{% for transaction in user.get('transactions') %}
-				<li class="transaction-item" data-bs-toggle="tooltip" data-bs-placement="bottom" title="{{transaction.get('created_at')}}">
-					<div class="transaction-details">
+				<li class="d-flex align-items-center justify-content-between bg-white rounded shadow-sm p-3 mb-3">
+					<div class="d-flex align-items-center">
 						{% if transaction.get('type') == 'debt' %}
-							<div class="transaction-icon bg-danger-light">
-								<i class="fa-solid fa-arrow-down"></i>
+							<div class="rounded-circle bg-danger-light d-flex align-items-center justify-content-center me-3" style="width: 40px; height: 40px;">
+								<i class="fa-solid fa-arrow-down text-danger"></i>
 							</div>
 						{% else %}
-							<div class="transaction-icon bg-success-light">
-								<i class="fa-solid fa-arrow-up"></i>
+							<div class="rounded-circle bg-success-light d-flex align-items-center justify-content-center me-3" style="width: 40px; height: 40px;">
+								<i class="fa-solid fa-arrow-up text-success"></i>
 							</div>
 						{% endif %}
 						<div>
-							<div class="transaction-description">{{ transaction.get('description') }}</div>
+							<p class="fw-bold mb-0">{{ transaction.get('description') }}</p>
+							<small class="text-muted">{{ transaction.get('created_at') }}</small>
 						</div>
 					</div>
 					{% if transaction.get('type') == 'debt' %}
-						<div class="transaction-amount text-danger">-₦{{ transaction.get('amount_display') }}</div>
+						<p class="fw-bold text-danger mb-0">-₦{{ transaction.get('amount_display') }}</p>
 					{% else %}
-						<div class="transaction-amount text-success">+₦{{ transaction.get('amount_display') }}</div>
+						<p class="fw-bold text-success mb-0">+₦{{ transaction.get('amount_display') }}</p>
 					{% endif %}
 				</li>
 			{% endfor %}

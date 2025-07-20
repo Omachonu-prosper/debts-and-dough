@@ -1,12 +1,51 @@
 /* General styles */
 body {
     font-family: 'Poppins', sans-serif;
-    background-color: #f8f9fa;
     color: #333;
 }
 
 .container {
     padding: 0 15px;
+}
+
+/* Sidebar styles */
+.sidebar {
+    width: 80px;
+    background-color: #2c3e50; /* Darker color for sidebar */
+    color: #ecf0f1;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding: 20px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+}
+
+.sidebar-icon {
+    font-size: 28px;
+    color: #bdc3c7;
+    margin-bottom: 0; /* Remove vertical margin */
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.sidebar-icon:hover {
+    color: #ffffff;
+    transform: scale(1.1);
+}
+
+.sidebar-icon.me-3 {
+    margin-right: 1rem !important; /* Add horizontal spacing */
+}
+
+.main-content {
+    margin-left: 80px; /* Same width as sidebar */
+    background-color: #f4f7f6; /* Slightly different from sidebar */
+    min-height: 100vh;
+    padding: 20px;
 }
 
 /* Cards */
@@ -98,7 +137,7 @@ body {
     padding: 15px;
     margin-bottom: 10px;
     background-color: #fff;
-    border-radius: 10px;
+    border-radius: 10px; /* Keep rounded edges */
     box-shadow: 0 2px 5px rgba(0,0,0,0.05);
 }
 
@@ -153,55 +192,4 @@ body {
 
 .transaction-amount.text-success {
     color: #388e3c !important;
-}
-
-/* Floating Navbar */
-.floating-nav {
-    position: sticky;
-    top: 15px;
-    z-index: 1020;
-    margin: 0 auto 30px auto;
-    width: 100%;
-    max-width: 960px; /* or your preferred max-width */
-    background-color: rgba(255, 255, 255, 0.9);
-    backdrop-filter: blur(10px);
-    border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-    padding: 10px 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.nav-brand h3 {
-    font-size: 22px;
-    font-weight: 600;
-    margin: 0;
-}
-
-.nav-user {
-    display: flex;
-    align-items: center;
-}
-
-.nav-user .username {
-    margin-right: 15px;
-    font-weight: 500;
-}
-
-.nav-user .dropdown-toggle {
-    background: transparent;
-    border: none;
-    color: #333;
-    font-size: 20px;
-}
-
-.nav-user .dropdown-toggle::after {
-    display: none; /* Hides the default caret */
-}
-
-.nav-user .dropdown-menu {
-    border-radius: 8px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    border: none;
 }

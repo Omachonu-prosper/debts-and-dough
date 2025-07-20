@@ -1,84 +1,64 @@
-{% extends 'layout.html' %}
-{% block content %}
+{% extends "page_layout.html" %} {% block main_content %}
 
-<nav class="navbar navbar-light bg-light">
-    <div class="container-fluid">
-        <span class="navbar-brand mb-0 h1">
-            <a href="{{ url_for('home_page') }}" class="no-underline">   
-                <i class="fa-solid fa-home"></i> 
-            </a>
-            Your Dough
-        </span>
-    </div>
-</nav>
-
-<div class="container-sm mt-4">
-
-    <!-- Card section -->
-    <section class="container">
-        <div class="row">
-            <div class="card text-white bg-success mb-3 w-40 col br10">
-                <div class="card-header">Your liquid assets</div>
-                <div class="card-body">
-                <h6 class="card-title">₦{{user.get('dough_display', '0.00')}}</h6>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="container">
-        <div class="row">
-            <button type="submit" data-bs-toggle="modal" data-bs-target="#increaseDough" class="btn btn-success col mr3 br10">Increase dough</button>
-            <div class="modal fade" id="increaseDough" aria-hidden="true" aria-labelledby="increaseDoughLabel" tabindex="-1">
-                <div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <p class="tracking-history-p">Enter an amount to add to your dough (assets)</p>
-        
-                            <form action="{{url_for('dough_page')}}" method="post">
-                                <div class="mb-3">
-                                    <input  type="number" inputmode="decimal" pattern="[0-9]+(\.[0-9]{1,2})?" class="form-control" id="addDebtInput" name="increase_dough">
-                                </div>
-                                <button type="submit" class="btn btn-success">Increase dough</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <button type="submit" data-bs-toggle="modal" data-bs-target="#reduceDough" class="btn btn-danger col ml3 br10">Reduce dough</button>
-            <div class="modal fade" id="reduceDough" aria-hidden="true" aria-labelledby="reduceDoughlabel" tabindex="-1">
-                <div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <p class="tracking-history-p">Enter an amount to subtract from your dough (assets)</p>
-        
-                            <form action="{{url_for('dough_page')}}" method="post">
-                                <div class="mb-3">
-                                    <input  type="number" inputmode="decimal" pattern="[0-9]+(\.[0-9]{1,2})?" class="form-control" id="addDebtInput" name="reduce_dough">
-                                </div>
-                                <button type="submit" class="btn btn-danger">Reduce dough</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <div class="mt-4">
-
-    {% include 'tracking-history.html' %}
-    
-    </div>
-    
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <h1 class="h3 mb-0">Your Dough</h1>
+  <a href="{{ url_for('home_page') }}" class="btn btn-outline-secondary"
+    ><i class="fa-solid fa-arrow-left me-2"></i>Back to Dashboard</a
+  >
 </div>
 
+<section class="card text-white bg-success shadow-sm mb-4">
+  <div class="card-body">
+    <h5 class="card-title">Your liquid assets</h5>
+    <p class="card-text fs-4">₦{{user.get('dough_display', '0.00')}}</p>
+  </div>
+</section>
 
-{% endblock %}
+<section class="row">
+  <div class="col-md-6 mb-4">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h5 class="card-title mb-3">Increase Dough</h5>
+        <form action="{{url_for('dough_page')}}" method="post">
+          <div class="mb-3">
+            <input
+              type="number"
+              inputmode="decimal"
+              pattern="[0-9]+(\.[0-9]{1,2})?"
+              class="form-control"
+              name="increase_dough"
+              placeholder="Amount"
+              required
+            />
+          </div>
+          <button type="submit" class="btn btn-success w-100">Add Dough</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6 mb-4">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h5 class="card-title mb-3">Reduce Dough</h5>
+        <form action="{{url_for('dough_page')}}" method="post">
+          <div class="mb-3">
+            <input
+              type="number"
+              inputmode="decimal"
+              pattern="[0-9]+(\.[0-9]{1,2})?"
+              class="form-control"
+              name="reduce_dough"
+              placeholder="Amount"
+              required
+            />
+          </div>
+          <button type="submit" class="btn btn-danger w-100">
+            Subtract Dough
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% include 'tracking-history.html' %} {% endblock %}

@@ -1,0 +1,24 @@
+{% extends "base_layout.html" %} {% block content %}
+<div class="d-flex">
+  <div
+    class="sidebar d-flex flex-column justify-content-between align-items-center py-4"
+  >
+    <div class="d-flex flex-column">
+      <a href="#" class="sidebar-icon mb-4"
+        ><i class="fa-solid fa-chart-line"></i
+      ></a>
+      <a href="#" class="sidebar-icon mb-4"
+        ><i class="fa-solid fa-wallet"></i
+      ></a>
+    </div>
+    <a href="{{ url_for('logout') }}" class="sidebar-icon"
+      ><i class="fa-solid fa-power-off"></i
+    ></a>
+  </div>
+  <div class="main-content flex-grow-1">
+    <div class="container">
+      <main>{% block main_content %}{% endblock %}</main>
+    </div>
+  </div>
+</div>
+{% endblock %}

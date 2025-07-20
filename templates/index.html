@@ -1,26 +1,27 @@
-{% extends "layout.html" %}
-{% block content %}
+{% extends "page_layout.html" %} {% block main_content %}
 
-<section class="card-section">
-    <a href="{{ url_for('debts_page') }}" class="w-48 no-underline">
-        <div class="card bg-danger">
-            <div class="card-header">Debts <i class="fa-solid fa-arrow-up"></i></div>
-            <div class="card-body">
-                <h4 class="card-title">₦{{user.get('debts_display', '0.00')}}</h4>
-            </div>
-        </div>
-    </a>
-
-    <a href="{{ url_for('dough_page') }}" class="w-48 no-underline">
-        <div class="card bg-success">
-            <div class="card-header">Dough <i class="fa-solid fa-arrow-down"></i></div>
-            <div class="card-body">
-                <h4 class="card-title">₦{{user.get('dough_display', '0.00')}}</h4>
-            </div>
-        </div>
-    </a>
+<section class="d-flex justify-content-between align-items-center mb-4">
+  <h1 class="h3 mb-0">Welcome, {{user.get('username', '')}}!</h1>
 </section>
 
-{% include 'tracking-history.html' %}
+<section class="d-flex justify-content-between mb-4">
+  <a href="{{ url_for('debts_page') }}" class="text-decoration-none w-50 me-2">
+    <div class="card text-white bg-danger shadow-sm">
+      <div class="card-body">
+        <h5 class="card-title">Debts <i class="fa-solid fa-arrow-up"></i></h5>
+        <p class="card-text fs-4">₦{{user.get('debts_display', '0.00')}}</p>
+      </div>
+    </div>
+  </a>
 
-{% endblock %}
+  <a href="{{ url_for('dough_page') }}" class="text-decoration-none w-50 ms-2">
+    <div class="card text-white bg-success shadow-sm">
+      <div class="card-body">
+        <h5 class="card-title">Dough <i class="fa-solid fa-arrow-down"></i></h5>
+        <p class="card-text fs-4">₦{{user.get('dough_display', '0.00')}}</p>
+      </div>
+    </div>
+  </a>
+</section>
+
+{% include 'tracking-history.html' %} {% endblock %}
