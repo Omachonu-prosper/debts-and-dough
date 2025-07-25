@@ -81,7 +81,7 @@
       },
       xaxis: {
         type: 'datetime',
-        range: 7 * 24 * 60 * 60 * 1000 // 7 days in ms
+        range: 365 * 24 * 60 * 60 * 1000 // 7 days in ms
       },
       tooltip: {
         y: {
@@ -95,7 +95,6 @@
 
   var debtChart = new ApexCharts(document.querySelector("#debtChart"), chartOptions("Debts", formattedDebtData));
   debtChart.render();
-
 
   var doughChart = new ApexCharts(document.querySelector("#doughChart"), chartOptions("Dough", formattedDoughData));
   doughChart.render();
