@@ -104,10 +104,6 @@ body {
     border-top: 1px solid #eee;
 }
 
-.tracking-table .small-font {
-    font-size: 13px;
-}
-
 .icon-red {
     color: #d32f2f;
 }
@@ -118,10 +114,6 @@ body {
 
 .no-underline {
     text-decoration: none;
-}
-
-.w-48 {
-    width: 48%;
 }
 
 /* Transaction List */
@@ -218,34 +210,36 @@ body {
     cursor: pointer;
 }
 
+/* Mobile-specific adjustments */
 @media (max-width: 767.98px) {
     body {
-        font-size: 0.8rem; /* Even smaller base font size for mobile */
+        font-size: 14px; /* Normalized base font size for mobile */
     }
     .main-content {
         margin-left: 0;
-        padding-bottom: 65px; /* Space for bottom nav */
+        padding: 15px; /* Consistent padding */
+        padding-bottom: 70px; /* Space for bottom nav */
     }
     .h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
-        font-size: 1rem; /* Adjust heading sizes */
+        font-size: 1.2rem; /* Adjusted heading sizes */
     }
     .card-title {
-        font-size: 1.2rem; /* Adjust card title size */
+        font-size: 1.3rem; /* Adjusted card title size */
     }
     .card-text.fs-4 {
-        font-size: 1rem !important; /* Adjust card text size */
+        font-size: 1.1rem !important; /* Adjusted card text size */
     }
     .sidebar-icon {
-        font-size: 20px; /* Smaller icons for mobile sidebar */
+        font-size: 22px; /* Consistent icon size */
     }
     .bottom-nav-icon {
-        font-size: 18px; /* Smaller icons for bottom nav */
+        font-size: 20px; /* Consistent icon size for bottom nav */
     }
     .card-header {
         font-size: 14px;
     }
     .card-body {
-        padding: 15px;
+        padding: 10px;
     }
     .transaction-item {
         padding: 10px;
@@ -265,57 +259,62 @@ body {
         font-size: 14px;
     }
     .bottom-nav {
-        height: 50px;
+        height: 60px;
     }
-}
 
-@media (max-width: 300px) {
-    body {
-        font-size: 0.7rem; /* Even smaller base font size for very small mobile */
+    .container {
+        width: 90vw;
     }
-    .main-content {
-        padding: 10px; /* Reduce padding */
-        padding-bottom: 60px; /* Adjust for smaller bottom nav */
-    }
-    .h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
-        font-size: 0.9rem; /* Further adjust heading sizes */
-    }
-    .card-title {
-        font-size: 1rem; /* Further adjust card title size */
-    }
-    .card-text.fs-4 {
-        font-size: 0.9rem !important; /* Further adjust card text size */
-    }
-    .sidebar-icon {
-        font-size: 18px; /* Even smaller icons */
-    }
-    .bottom-nav-icon {
-        font-size: 16px; /* Even smaller icons for bottom nav */
-    }
-    .card-header {
-        font-size: 12px;
-    }
-    .card-body {
-        padding: 10px;
-    }
-    .transaction-item {
-        padding: 8px;
-    }
-    .transaction-icon {
-        width: 25px;
-        height: 25px;
-        margin-right: 8px;
-    }
-    .transaction-description {
-        font-size: 12px;
-    }
-    .transaction-date {
-        font-size: 9px;
-    }
-    .transaction-amount {
-        font-size: 13px;
-    }
-    .bottom-nav {
-        height: 45px;
+
+    /* Specific adjustments for very small screens (e.g., < 375px) */
+    @media (max-width: 374.98px) {
+        body {
+            font-size: 13px;
+        }
+        .main-content {
+            padding: 10px;
+            padding-bottom: 65px;
+        }
+        .h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
+            font-size: 1.1rem;
+        }
+        .card-title {
+            font-size: 1.2rem;
+        }
+        .card-text.fs-4 {
+            font-size: 1rem !important;
+        }
+        .sidebar-icon {
+            font-size: 20px;
+        }
+        .bottom-nav-icon {
+            font-size: 18px;
+        }
+        .card-header {
+            font-size: 13px;
+        }
+        .card-body {
+            padding: 12px;
+        }
+        .transaction-item {
+            padding: 8px;
+        }
+        .transaction-icon {
+            width: 28px;
+            height: 28px;
+            margin-right: 8px;
+        }
+        .transaction-description {
+            font-size: 12px;
+        }
+        .transaction-date {
+            font-size: 9px;
+        }
+        .transaction-amount {
+            font-size: 13px;
+        }
+        .bottom-nav {
+            height: 55px;
+        }
     }
 }
