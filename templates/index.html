@@ -45,101 +45,59 @@
   // Chart data will be populated by Flask
   const debtData = {{ debt_chart_data | tojson }};
   const doughData = {{ dough_chart_data | tojson }};
-
-  // Render Debt Chart
-  var debtOptions = {
-    series: [{
-      name: 'Debt Amount',
-      data: debtData.values
-    }],
-    chart: {
-      height: 350,
-      type: 'line',
-      zoom: {
-        enabled: true
-      },
-      toolbar: {
-        autoSelected: 'pan',
-        show: true
-      }
-    },
-    dataLabels: {
-      enabled: false
-    },
-    stroke: {
-      curve: 'smooth'
-    },
-    title: {
-      text: 'Debt Trends',
-      align: 'left'
-    },
-    grid: {
-      row: {
-        colors: ['#f3f3f3', 'transparent'], // takes an array which will be repeated on columns
-        opacity: 0.5
-      },
-    },
-    xaxis: {
-      categories: debtData.labels,
-    },
-    tooltip: {
-        y: {
-            formatter: function (val) {
-                return "₦ " + val
-            }
-        }
-    }
-  };
-
-  var debtChart = new ApexCharts(document.querySelector("#debtChart"), debtOptions);
-  debtChart.render();
+  const formattedDebtData = debtData.labels.map((label, index) => {
+    return [new Date(label).getTime(), debtData.values[index]];
+  });
+  const formattedDoughData = doughData.labels.map((label, index) => {
+    return [new Date(label).getTime(), doughData.values[index]];
+  });
 
   // Render Dough Chart
-  var doughOptions = {
-    series: [{
-      name: 'Dough Amount',
-      data: doughData.values
-    }],
-    chart: {
-      height: 350,
-      type: 'line',
-      zoom: {
-        enabled: true
-      },
-      toolbar: {
-        autoSelected: 'pan',
-        show: true
-      }
-    },
-    dataLabels: {
-      enabled: false
-    },
-    stroke: {
-      curve: 'smooth'
-    },
-    title: {
-      text: 'Dough Trends',
-      align: 'left'
-    },
-    grid: {
-      row: {
-        colors: ['#f3f3f3', 'transparent'], // takes an array which will be repeated on columns
-        opacity: 0.5
-      },
-    },
-    xaxis: {
-      categories: doughData.labels,
-    },
-    tooltip: {
-        y: {
-            formatter: function (val) {
-                return "₦ " + val
-            }
+  var chartOptions = (chartName, chartData) => {
+    return {
+      series: [{
+        name: chartName,
+        data: chartData
+      }],
+      chart: {
+        height: 350,
+        type: 'line',
+        zoom: {
+          enabled: true,
+          type: 'x',
+          autoScaleYaxis: true
+        },
+        toolbar: {
+          autoSelected: 'pan',
+          show: true,
+          tools: {
+            pan: true,
+            zoom: true,
+            reset: true,
+            zoomin: true,
+            zoomout: true
+          }
         }
-    }
-  };
+      },
+      xaxis: {
+        type: 'datetime',
+        range: 7 * 24 * 60 * 60 * 1000 // 7 days in ms
+      },
+      tooltip: {
+        y: {
+          formatter: function (val) {
+            return "₦ " + val;
+          }
+        }
+      }
+    };
+  }
 
-  var doughChart = new ApexCharts(document.querySelector("#doughChart"), doughOptions);
+  var debtChart = new ApexCharts(document.querySelector("#debtChart"), chartOptions("Debts", formattedDebtData));
+  debtChart.render();
+
+
+  var doughChart = new ApexCharts(document.querySelector("#doughChart"), chartOptions("Dough", formattedDoughData));
   doughChart.render();
 </script>
 
