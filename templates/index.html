@@ -27,7 +27,6 @@
 <section class="row mt-4">
   <div class="col-md-6">
     <div class="card shadow-sm mb-4">
-      <div class="card-header">Debt Trends</div>
       <div class="card-body">
         <div id="debtChart" style="height: 400px"></div>
       </div>
@@ -35,7 +34,6 @@
   </div>
   <div class="col-md-6">
     <div class="card shadow-sm mb-4">
-      <div class="card-header">Dough Trends</div>
       <div class="card-body">
         <div id="doughChart" style="height: 400px"></div>
       </div>
@@ -59,6 +57,10 @@
       type: 'line',
       zoom: {
         enabled: true
+      },
+      toolbar: {
+        autoSelected: 'pan',
+        show: true
       }
     },
     dataLabels: {
@@ -103,6 +105,10 @@
       type: 'line',
       zoom: {
         enabled: true
+      },
+      toolbar: {
+        autoSelected: 'pan',
+        show: true
       }
     },
     dataLabels: {
